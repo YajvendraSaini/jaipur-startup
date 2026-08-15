@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { ArrowLeft, Save, ExternalLink, CheckCircle, Plus } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useStartupsStore } from '@/lib/store';
@@ -68,7 +69,9 @@ export default function EditStartupPage() {
         <div className={styles.emptyNotice}>
           <h2>No Startup Found</h2>
           <p>You have not listed a startup yet.</p>
-          <Link href="/add" className={styles.addBtn}>+ Add Your Startup</Link>
+          <Link href="/add" className={styles.addBtn}>
+            <Plus size={16} /> Add Your Startup
+          </Link>
         </div>
         <Footer />
       </div>
@@ -79,21 +82,34 @@ export default function EditStartupPage() {
     <div className={styles.pageContainer}>
       <Navbar />
 
+      {/* Hero Header matching site identity */}
+      <section className={styles.heroHeader}>
+        <div className={styles.bgImageContainer}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/Header.png"
+            alt="Jaipur Architecture Backdrop"
+            className={styles.bgImage}
+          />
+        </div>
+
+        <div className={styles.heroContent}>
+          <Link href="/my-startup" className={styles.backLink}>
+            <ArrowLeft size={15} /> Back to Founder Area
+          </Link>
+          <h1 className={styles.heroTitle}>Edit Startup Profile</h1>
+          <p className={styles.heroSubtitle}>
+            Keep your company details, team metrics, and map location up to date.
+          </p>
+        </div>
+      </section>
+
       <main className={styles.main}>
         <div className={styles.container}>
-          <div className={styles.header}>
-            <Link href="/my-startup" className={styles.backLink}>
-              ← Back to Founder Area
-            </Link>
-            <h1 className={styles.title}>Edit Startup Profile</h1>
-            <p className={styles.subtitle}>
-              Keep your company details, team metrics, and map location up to date.
-            </p>
-          </div>
-
           {isSaved && (
             <div className={styles.saveSuccessBanner}>
-              ✅ Changes saved successfully! Your updated profile is now live.
+              <CheckCircle size={20} className={styles.successIconLucide} />
+              <span>Changes saved successfully! Your updated profile is now live.</span>
             </div>
           )}
 
@@ -313,14 +329,14 @@ export default function EditStartupPage() {
 
               <div className={styles.actionsRow}>
                 <button type="submit" className={styles.saveBtn} id="edit-save-btn">
-                  💾 Save Changes
+                  <Save size={16} /> Save Changes
                 </button>
 
                 <Link
                   href={`/startup/${myStartup.slug}`}
                   className={styles.viewBtn}
                 >
-                  View Public Profile →
+                  View Public Profile <ExternalLink size={14} />
                 </Link>
               </div>
             </form>
