@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { Navigation, Plus, Minus, MapPin, ArrowRight } from 'lucide-react';
 import { Startup } from '@/lib/data';
 import styles from './StartupMap.module.css';
 
@@ -74,15 +75,15 @@ function CustomMapControls() {
         className={styles.myLocationBtn}
         type="button"
       >
-        <span className={styles.locIcon}>📍</span> My Location
+        <Navigation size={15} className={styles.locIcon} /> My Location
       </button>
 
       <div className={styles.zoomControls}>
-        <button onClick={handleZoomIn} className={styles.zoomBtn} type="button">
-          +
+        <button onClick={handleZoomIn} className={styles.zoomBtn} type="button" aria-label="Zoom in">
+          <Plus size={16} />
         </button>
-        <button onClick={handleZoomOut} className={styles.zoomBtn} type="button">
-          −
+        <button onClick={handleZoomOut} className={styles.zoomBtn} type="button" aria-label="Zoom out">
+          <Minus size={16} />
         </button>
       </div>
     </>
@@ -142,12 +143,15 @@ export default function StartupMap({
                     </div>
                   </div>
                   <p className={styles.popupTagline}>{startup.tagline}</p>
-                  <p className={styles.popupLocation}>📍 {startup.location}</p>
+                  <p className={styles.popupLocation}>
+                    <MapPin size={13} style={{ display: 'inline', marginRight: 4 }} />
+                    {startup.location}
+                  </p>
                   <button
                     onClick={() => onSelectStartup(startup)}
                     className={styles.popupBtn}
                   >
-                    View Details →
+                    View Details <ArrowRight size={13} style={{ display: 'inline', marginLeft: 4 }} />
                   </button>
                 </div>
               </Popup>

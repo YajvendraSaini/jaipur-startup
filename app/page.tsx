@@ -3,6 +3,17 @@
 import { useState, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import {
+  Search,
+  ChevronDown,
+  Globe,
+  MapPin,
+  X,
+  Users,
+  ArrowRight,
+  Maximize2,
+  ExternalLink,
+} from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useStartupsStore } from '@/lib/store';
@@ -73,7 +84,7 @@ export default function Home() {
           {/* Floating Search & Filter Bar (Shadcn UI style from Map UI.png) */}
           <div className={styles.searchFilterCard}>
             <div className={styles.searchInputBox}>
-              <span className={styles.searchIcon}>🔍</span>
+              <Search size={18} className={styles.searchIconLucide} />
               <input
                 type="text"
                 placeholder="Type a startup name or search..."
@@ -87,7 +98,7 @@ export default function Home() {
                   onClick={() => setSearchQuery('')}
                   className={styles.clearSearchBtn}
                 >
-                  ✕
+                  <X size={15} />
                 </button>
               )}
             </div>
@@ -109,7 +120,7 @@ export default function Home() {
                   </option>
                 ))}
               </select>
-              <span className={styles.dropdownChevron}>⌄</span>
+              <ChevronDown size={16} className={styles.dropdownChevronLucide} />
             </div>
 
             <div className={styles.selectDivider}></div>
@@ -129,7 +140,7 @@ export default function Home() {
                   </option>
                 ))}
               </select>
-              <span className={styles.dropdownChevron}>⌄</span>
+              <ChevronDown size={16} className={styles.dropdownChevronLucide} />
             </div>
           </div>
         </div>
@@ -174,7 +185,7 @@ export default function Home() {
                       className={styles.closeDetailBtn}
                       title="Close details view"
                     >
-                      ✕
+                      <X size={15} />
                     </button>
                   </div>
 
@@ -182,8 +193,12 @@ export default function Home() {
                   <p className={styles.detailDesc}>{selectedStartup.description}</p>
 
                   <div className={styles.detailMetaRow}>
-                    <span>📍 {selectedStartup.location}</span>
-                    <span>👥 {selectedStartup.teamSize} Employees</span>
+                    <span>
+                      <MapPin size={14} className={styles.inlineIcon} /> {selectedStartup.location}
+                    </span>
+                    <span>
+                      <Users size={14} className={styles.inlineIcon} /> {selectedStartup.teamSize} Employees
+                    </span>
                   </div>
 
                   {selectedStartup.founders && selectedStartup.founders.length > 0 && (
@@ -198,7 +213,7 @@ export default function Home() {
                       href={`/startup/${selectedStartup.slug}`}
                       className={styles.primaryDetailBtn}
                     >
-                      View Full Profile →
+                      View Full Profile <ArrowRight size={14} className={styles.inlineIconRight} />
                     </Link>
 
                     {selectedStartup.website && (
@@ -208,7 +223,7 @@ export default function Home() {
                         rel="noopener noreferrer"
                         className={styles.secondaryDetailBtn}
                       >
-                        🌐 Website
+                        <Globe size={14} className={styles.inlineIcon} /> Website
                       </a>
                     )}
                   </div>
@@ -249,11 +264,11 @@ export default function Home() {
                             className={styles.actionBtn}
                             onClick={(e) => e.stopPropagation()}
                           >
-                            🌐 View Website
+                            <Globe size={14} /> View Website
                           </a>
                         ) : (
                           <span className={styles.actionBtnDisabled}>
-                            🌐 View Website
+                            <Globe size={14} /> View Website
                           </span>
                         )}
 
@@ -265,7 +280,7 @@ export default function Home() {
                             setSelectedStartup(startup);
                           }}
                         >
-                          🔍 Quick Scan
+                          <Maximize2 size={13} /> Quick Scan
                         </button>
                       </div>
                     </div>
@@ -291,7 +306,7 @@ export default function Home() {
 
               {/* Bottom Right CTA matching Map UI.png */}
               <Link href="/add" className={styles.addFreeCtaBtn} id="add-free-cta-btn">
-                <span className={styles.ctaPinIcon}>📍</span> Add your startup for free!
+                <MapPin size={18} /> Add your startup for free!
               </Link>
             </aside>
           </div>
