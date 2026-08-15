@@ -2,143 +2,171 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-dark);
+  background-color: #ffffff;
+  color: #0f172a;
 }
 
-/* ── Hero Banner Section ── */
+/* ── Hero Banner Section matching Header.png & Map UI.png ── */
 .heroHeader {
   position: relative;
   width: 100%;
-  padding: 3.5rem 1.5rem 3rem;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 1.5rem 5rem;
   overflow: hidden;
-  border-bottom: 1px solid var(--border-subtle);
-  background: radial-gradient(circle at 50% 0%, rgba(255, 117, 140, 0.12) 0%, rgba(15, 10, 13, 1) 70%);
+  background: #111827;
 }
 
 .bgImageContainer {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  opacity: 0.18;
-  pointer-events: none;
+  z-index: 1;
 }
 
 .bgImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
-  filter: contrast(1.1) saturate(1.2);
+  object-position: center;
+  filter: brightness(0.85);
 }
 
-.bgOverlay {
+.heroHeader::after {
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15, 10, 13, 0.4) 0%, rgba(15, 10, 13, 1) 95%);
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.4) 0%,
+    rgba(15, 23, 42, 0.1) 60%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 
 .heroContent {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   max-width: 900px;
   margin: 0 auto;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 117, 140, 0.12);
-  border: 1px solid rgba(255, 117, 140, 0.3);
-  color: #ff9eba;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.35rem 0.9rem;
-  border-radius: 100px;
-  margin-bottom: 1.25rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.badgeDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #ff4d6d;
-  box-shadow: 0 0 8px #ff4d6d;
-}
-
-.title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-  font-weight: 400;
-  line-height: 1.15;
+.heroTitle {
+  font-family: var(--font-serif), 'Georgia', serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 700;
   color: #ffffff;
-  margin-bottom: 1rem;
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   letter-spacing: -0.01em;
 }
 
-.highlight {
-  background: linear-gradient(135deg, #ff9eba 0%, #ff4d6d 50%, #d97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 600;
-}
-
-.subtitle {
-  font-size: clamp(1rem, 1.3vw, 1.2rem);
-  color: var(--text-muted);
+.heroSubtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+  margin-bottom: 2.5rem;
   max-width: 680px;
-  line-height: 1.55;
-  margin-bottom: 2rem;
+  line-height: 1.45;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-.statsBar {
-  display: inline-flex;
-  align-items: center;
-  gap: 2rem;
-  background: rgba(24, 17, 22, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 117, 140, 0.2);
-  padding: 0.75rem 2rem;
+/* Floating Search & Filter Bar matching Map UI.png */
+.searchFilterCard {
+  width: 100%;
+  max-width: 780px;
+  background: #ffffff;
   border-radius: 100px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.statItem {
+.searchInputBox {
+  flex: 2;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  padding: 0.4rem 1rem;
+}
+
+.searchIcon {
+  font-size: 1.1rem;
+  margin-right: 0.6rem;
+  color: #64748b;
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #0f172a;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #94a3b8;
+}
+
+.clearSearchBtn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0 0.4rem;
+}
+
+.selectDivider {
+  width: 1px;
+  height: 28px;
+  background: #e2e8f0;
+}
+
+.selectBox {
+  flex: 1;
+  position: relative;
+  display: flex;
   align-items: center;
 }
 
-.statNumber {
-  font-family: var(--font-serif);
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #ff9eba;
+.selectInput {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #334155;
+  padding: 0.6rem 2rem 0.6rem 1.2rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
 }
 
-.statLabel {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.dropdownChevron {
+  position: absolute;
+  right: 1.2rem;
+  pointer-events: none;
+  font-size: 0.9rem;
+  color: #64748b;
 }
 
-.statDivider {
-  width: 1px;
-  height: 24px;
-  background: rgba(255, 117, 140, 0.2);
-}
-
-/* ── Discovery Section (Map + Cards) ── */
-.discoverySection {
-  flex: 1;
-  padding: 2rem 1.5rem 4rem;
+/* ── Main Map & Discovery Section matching Map UI.png ── */
+.mapSection {
+  padding: 2.5rem 1.5rem 5rem;
+  background: #ffffff;
 }
 
 .container {
@@ -146,462 +174,282 @@
   margin: 0 auto;
 }
 
-/* Filter controls bar */
-.filterBar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  padding: 0.9rem 1.25rem;
-  border-radius: var(--radius-md);
+.mapHeading {
+  font-family: var(--font-serif), 'Georgia', serif;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1.75rem;
+  letter-spacing: -0.02em;
 }
 
-.searchBox {
-  flex: 1;
-  min-width: 260px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.searchIcon {
-  position: absolute;
-  left: 1rem;
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  pointer-events: none;
-}
-
-.searchInput {
-  width: 100%;
-  background: rgba(15, 10, 13, 0.8);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  padding: 0.65rem 2.2rem 0.65rem 2.5rem;
-  border-radius: 100px;
-  font-size: 0.9rem;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-.searchInput:focus {
-  border-color: var(--jaipur-pink);
-  box-shadow: 0 0 0 3px rgba(255, 117, 140, 0.15);
-}
-
-.clearBtn {
-  position: absolute;
-  right: 0.8rem;
-  background: transparent;
-  border: none;
-  color: var(--text-dim);
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-
-.filtersGroup {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.selectWrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.selectLabel {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.select {
-  background: rgba(15, 10, 13, 0.8);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  padding: 0.6rem 2rem 0.6rem 0.8rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.select:focus {
-  border-color: var(--jaipur-pink);
-}
-
-.resetFiltersBtn {
-  background: rgba(255, 117, 140, 0.15);
-  border: 1px solid rgba(255, 117, 140, 0.3);
-  color: #ff9eba;
-  padding: 0.5rem 0.9rem;
-  font-size: 0.8rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.resetFiltersBtn:hover {
-  background: rgba(255, 117, 140, 0.25);
-}
-
-/* Map Grid Layout */
-.mapGrid {
+.mapLayoutGrid {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 1.5rem;
-  min-height: 580px;
+  grid-template-columns: 1fr 340px;
+  gap: 1.75rem;
+  align-items: start;
 }
 
 .mapColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  height: 100%;
+  min-height: 600px;
+  height: 600px;
 }
 
 .mapLoading {
   width: 100%;
-  height: 580px;
-  background: var(--bg-card);
-  border-radius: 16px;
+  height: 100%;
+  min-height: 560px;
+  background: #f8fafc;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  color: var(--text-muted);
-  border: 1px solid var(--border-subtle);
+  color: #64748b;
+  font-family: 'Inter', sans-serif;
 }
 
 .spinner {
-  width: 36px;
-  height: 36px;
-  border: 3px solid rgba(255, 117, 140, 0.2);
-  border-top-color: var(--jaipur-pink);
+  width: 38px;
+  height: 38px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #2563eb;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+  margin-bottom: 1rem;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.mapLegend {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 0.5rem;
-  font-size: 0.8rem;
-  color: var(--text-dim);
-}
-
-.legendTitle {
-  color: var(--text-muted);
-}
-
-.legendCount strong {
-  color: var(--jaipur-pink-light);
-}
-
-/* Sidebar Preview & List */
+/* Sidebar Stack matching Map UI.png */
 .sidebarColumn {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 }
 
-.previewCard {
-  background: var(--bg-card);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
-  position: relative;
+.cardsStack {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(180deg, rgba(30, 20, 27, 0.95) 0%, rgba(20, 14, 18, 0.98) 100%);
+  gap: 0.85rem;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
 }
 
-.closeCardBtn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: none;
-  color: var(--text-muted);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 0.9rem;
+/* Hide scrollbar for clean UI */
+.cardsStack::-webkit-scrollbar {
+  width: 5px;
+}
+.cardsStack::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.startupCard {
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 14px;
+  padding: 1.15rem;
   transition: all 0.2s ease;
 }
 
-.closeCardBtn:hover {
-  background: rgba(255, 117, 140, 0.2);
-  color: #ffffff;
+.startupCard:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
 }
 
-.previewLogoBadge {
-  font-size: 2.8rem;
+.cardHeaderRow {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  margin-bottom: 0.85rem;
+}
+
+.logoBox {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logoText {
+  font-size: 1.5rem;
   line-height: 1;
-  margin-bottom: 0.75rem;
 }
 
-.previewName {
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
-  color: #ffffff;
+.cardMeta {
+  flex: 1;
+}
+
+.startupName {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
   margin-bottom: 0.25rem;
+  line-height: 1.25;
 }
 
-.previewMeta {
+.startupDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardActionsRow {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
 }
 
-.previewSector {
-  font-size: 0.82rem;
+.actionBtn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--jaipur-pink);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.metaDot {
-  color: var(--text-dim);
-}
-
-.previewStage {
-  font-size: 0.82rem;
-  color: var(--jaipur-gold);
-  background: rgba(251, 191, 36, 0.12);
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-}
-
-.previewTagline {
-  font-size: 0.95rem;
-  color: #ffffff;
-  font-style: italic;
-  margin-bottom: 0.75rem;
-  line-height: 1.4;
-}
-
-.previewDesc {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
-}
-
-.previewInfoList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin-bottom: 1.5rem;
-  padding: 0.9rem 0;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.infoRow {
-  display: flex;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  gap: 0.3rem;
+  transition: all 0.15s ease;
 }
 
-.infoIcon {
-  font-size: 1rem;
+.actionBtn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
 }
 
-.cardActions {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.primaryCardBtn {
-  flex: 1;
-  text-align: center;
-  background: linear-gradient(135deg, #ff758c 0%, #e63946 100%);
-  color: #ffffff;
-  padding: 0.75rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.88rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.primaryCardBtn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
-}
-
-.secondaryCardBtn {
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-main);
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
+.actionBtnDisabled {
+  background: #f1f5f9;
+  border: 1px solid #f1f5f9;
+  color: #94a3b8;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
   font-weight: 500;
-  transition: all 0.2s ease;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  cursor: not-allowed;
 }
 
-.secondaryCardBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Sidebar List view when no marker is selected */
-.sidebarList {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  height: 580px;
-}
-
-.sidebarListHeader {
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.sidebarListHeader h3 {
-  font-size: 1.05rem;
+.actionBtnSecondary {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 0.2rem;
-}
-
-.sidebarListHeader p {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-}
-
-.scrollList {
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  padding-right: 0.4rem;
-}
-
-.miniCard {
-  display: flex;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  background: rgba(15, 10, 13, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.2s ease;
+  gap: 0.3rem;
+  transition: all 0.15s ease;
 }
 
-.miniCard:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-medium);
-  transform: translateX(3px);
+.actionBtnSecondary:hover {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
 }
 
-.miniLogo {
-  font-size: 1.5rem;
-}
-
-.miniDetails {
-  flex: 1;
-}
-
-.miniName {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.miniTag {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-}
-
-.miniArrow {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  transition: transform 0.2s ease;
-}
-
-.miniCard:hover .miniArrow {
-  color: var(--jaipur-pink);
-  transform: translateX(3px);
-}
-
-.emptyState {
-  padding: 2rem 1rem;
+.noResultsCard {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 2.5rem 1rem;
   text-align: center;
-  color: var(--text-dim);
-  font-size: 0.85rem;
+  color: #64748b;
+  font-size: 0.88rem;
 }
 
-.resetBtn {
-  margin-top: 0.75rem;
-  background: rgba(255, 117, 140, 0.15);
-  color: #ff9eba;
+.resetFiltersBtn {
+  margin-top: 0.8rem;
+  background: #2563eb;
+  color: #ffffff;
   border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.addCtaBanner {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: linear-gradient(135deg, rgba(255, 117, 140, 0.15) 0%, rgba(230, 57, 70, 0.15) 100%);
-  border: 1px dashed rgba(255, 117, 140, 0.4);
-  border-radius: var(--radius-sm);
-  text-align: center;
-}
-
-.addCtaBanner h4 {
-  font-size: 0.9rem;
-  color: #ffffff;
-  margin-bottom: 0.2rem;
-}
-
-.addCtaBanner p {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-}
-
-.bannerBtn {
-  display: inline-block;
-  background: var(--jaipur-pink);
-  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
   font-size: 0.8rem;
   font-weight: 600;
-  padding: 0.45rem 0.9rem;
-  border-radius: 100px;
+  cursor: pointer;
 }
 
+/* Prominent Lime Green CTA Button from Map UI.png */
+.addFreeCtaBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #bef264;
+  color: #1a2e05;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.9rem 1.5rem;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(190, 242, 100, 0.4);
+  transition: all 0.25s ease;
+  margin-top: auto;
+}
+
+.addFreeCtaBtn:hover {
+  background: #a3e635;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(163, 230, 53, 0.5);
+}
+
+.ctaPinIcon {
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
 @media (max-width: 1024px) {
-  .mapGrid {
+  .mapLayoutGrid {
     grid-template-columns: 1fr;
   }
-  .sidebarList {
-    height: 350px;
+  .mapColumn {
+    height: 480px;
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroHeader {
+    min-height: 440px;
+    padding: 6.5rem 1rem 3.5rem;
+  }
+  .searchFilterCard {
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+  .selectDivider {
+    width: 100%;
+    height: 1px;
   }
 }

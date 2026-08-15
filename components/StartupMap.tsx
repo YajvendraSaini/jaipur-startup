@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -8,40 +8,33 @@ import { Startup } from '@/lib/data';
 import styles from './StartupMap.module.css';
 
 // Fix for Leaflet marker default icons in Next.js
-const createCustomIcon = (sector: string, isSelected: boolean) => {
-  const getSectorEmoji = (sec: string) => {
-    switch (sec) {
-      case 'AI / ML': return '🤖';
-      case 'FinTech': return '💳';
-      case 'EdTech': return '📚';
-      case 'HealthTech': return '🌸';
-      case 'AgriTech': return '🌿';
-      case 'SaaS': return '🏷️';
-      case 'eCommerce': return '⌚';
-      case 'CleanTech': return '☀️';
-      case 'Logistics': return '🚀';
-      case 'Media': return '🎙️';
-      default: return '📍';
-    }
-  };
-
+const createCustomIcon = (startup: Startup, isSelected: boolean) => {
   const html = `
-    <div class="${styles.markerPin} ${isSelected ? styles.selected : ''}">
-      <span class="${styles.markerIcon}">${getSectorEmoji(sector)}</span>
+    <div class="${styles.markerPin} ${isSelected ? styles.selectedPin : ''}">
+      <div class="${styles.markerInner}">
+        <span class="${styles.markerLogo}">${startup.logo}</span>
+      </div>
+      <div class="${styles.pinTip}"></div>
     </div>
   `;
 
   return L.divIcon({
     html: html,
     className: 'custom-leaflet-pin',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-    popupAnchor: [0, -42],
+    iconSize: [38, 46],
+    iconAnchor: [19, 46],
+    popupAnchor: [0, -44],
   });
 };
 
-// Component to dynamically adjust bounds/center
-function MapController({ startups, selectedStartup }: { startups: Startup[]; selectedStartup?: Startup | null }) {
+// Component to dynamically adjust bounds/center and map controls
+function MapController({
+  startups,
+  selectedStartup,
+}: {
+  startups: Startup[];
+  selectedStartup?: Startup | null;
+}) {
   const map = useMap();
 
   useEffect(() => {
@@ -58,6 +51,44 @@ function MapController({ startups, selectedStartup }: { startups: Startup[]; sel
   return null;
 }
 
+// Controls overlay inside map
+function CustomMapControls() {
+  const map = useMap();
+
+  const handleMyLocation = () => {
+    map.flyTo([26.9124, 75.7873], 13, { duration: 1 });
+  };
+
+  const handleZoomIn = () => {
+    map.zoomIn();
+  };
+
+  const handleZoomOut = () => {
+    map.zoomOut();
+  };
+
+  return (
+    <>
+      <button
+        onClick={handleMyLocation}
+        className={styles.myLocationBtn}
+        type="button"
+      >
+        <span className={styles.locIcon}>📍</span> My Location
+      </button>
+
+      <div className={styles.zoomControls}>
+        <button onClick={handleZoomIn} className={styles.zoomBtn} type="button">
+          +
+        </button>
+        <button onClick={handleZoomOut} className={styles.zoomBtn} type="button">
+          −
+        </button>
+      </div>
+    </>
+  );
+}
+
 interface StartupMapProps {
   startups: Startup[];
   selectedStartup: Startup | null;
@@ -69,7 +100,6 @@ export default function StartupMap({
   selectedStartup,
   onSelectStartup,
 }: StartupMapProps) {
-  // Jaipur City Center fallback coordinates
   const jaipurCenter: [number, number] = [26.9124, 75.7873];
 
   return (
@@ -77,6 +107,7 @@ export default function StartupMap({
       <MapContainer
         center={jaipurCenter}
         zoom={12}
+        zoomControl={false}
         scrollWheelZoom={true}
         className={styles.leafletContainer}
       >
@@ -86,6 +117,7 @@ export default function StartupMap({
         />
 
         <MapController startups={startups} selectedStartup={selectedStartup} />
+        <CustomMapControls />
 
         {startups.map((startup) => {
           const isSelected = selectedStartup?.id === startup.id;
@@ -93,7 +125,7 @@ export default function StartupMap({
             <Marker
               key={startup.id}
               position={[startup.latitude, startup.longitude]}
-              icon={createCustomIcon(startup.sector, isSelected)}
+              icon={createCustomIcon(startup, isSelected)}
               eventHandlers={{
                 click: () => onSelectStartup(startup),
               }}

@@ -8,11 +8,15 @@ export default function Footer() {
         <div className={styles.top}>
           <div className={styles.brandCol}>
             <Link href="/" className={styles.brand}>
-              <span className={styles.brandTop}>JAIPUR</span>
-              <span className={styles.brandBottom}>STARTUP</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/text-logo.png"
+                alt="Jaipur Startup"
+                className={styles.brandLogoImg}
+              />
             </Link>
             <p className={styles.tagline}>
-              The public map and ecosystem directory for founders building from the Pink City of India.
+              Discover startups, founders and ideas shaping Jaipur&rsquo;s next chapter.
             </p>
           </div>
 
@@ -38,8 +42,8 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>© {new Date().getFullYear()} Jaipur Startup. Built for the Jaipur tech ecosystem.</p>
-          <span className={styles.builtWith}>Built with 💖 in Jaipur, Rajasthan</span>
+          <p>© {new Date().getFullYear()} Jaipur Startup. All rights reserved.</p>
+          <span className={styles.builtWith}>Building Jaipur&rsquo;s Startup Ecosystem</span>
         </div>
       </div>
     </footer>

@@ -1,18 +1,19 @@
 .mapWrapper {
   width: 100%;
   height: 100%;
-  min-height: 520px;
+  min-height: 560px;
   position: relative;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 117, 140, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f1f5f9;
 }
 
 .leafletContainer {
   width: 100%;
   height: 100%;
-  background: #141113;
+  background: #e2e8f0;
   z-index: 1;
 }
 
@@ -21,36 +22,123 @@
   border: none;
 }
 
+/* Marker Pins matching Map UI.png */
 .markerPin {
-  width: 40px;
-  height: 40px;
-  border-radius: 50% 50% 50% 0;
-  background: linear-gradient(135deg, #ff758c 0%, #e63946 100%);
-  position: absolute;
-  transform: rotate(-45deg);
-  left: 50%;
-  top: 50%;
-  margin: -20px 0 0 -20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #2563eb;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
 }
 
 .markerPin:hover,
-.markerPin.selected {
-  transform: rotate(-45deg) scale(1.25);
-  background: linear-gradient(135deg, #ff9eba 0%, #ff3b68 100%);
-  box-shadow: 0 8px 25px rgba(255, 117, 140, 0.7);
+.markerPin.selectedPin {
+  transform: scale(1.25);
+  border-color: #16a34a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   z-index: 999;
 }
 
-.markerIcon {
-  transform: rotate(45deg);
+.markerInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.1rem;
-  display: block;
+  line-height: 1;
+}
+
+.pinTip {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #2563eb;
+}
+
+.markerPin:hover .pinTip,
+.markerPin.selectedPin .pinTip {
+  border-top-color: #16a34a;
+}
+
+/* Controls overlay inside map matching Map UI.png */
+.myLocationBtn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.6rem 1.1rem;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+}
+
+.myLocationBtn:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+}
+
+.locIcon {
+  font-size: 1rem;
+}
+
+.zoomControls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.zoomBtn {
+  width: 38px;
+  height: 38px;
+  background: #ffffff;
+  border: none;
+  color: #334155;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.zoomBtn:first-child {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.zoomBtn:hover {
+  background: #f8fafc;
+  color: #0f172a;
 }
 
 /* Custom Popup Styles */
@@ -84,7 +172,7 @@
 .popupCategory {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #e63946;
+  color: #2563eb;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -116,5 +204,5 @@
 }
 
 .popupBtn:hover {
-  background: #e63946;
+  background: #2563eb;
 }

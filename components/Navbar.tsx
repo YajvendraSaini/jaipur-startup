@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
@@ -11,8 +12,12 @@ export default function Navbar() {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link href="/" className={styles.brand}>
-          <span className={styles.brandTop}>JAIPUR</span>
-          <span className={styles.brandBottom}>STARTUP</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/text-logo.png"
+            alt="Jaipur Startup"
+            className={styles.brandLogoImg}
+          />
         </Link>
 
         <nav className={styles.nav}>
