@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -10,6 +10,8 @@ import styles from './StartupMap.module.css';
 
 // Fix for Leaflet marker default icons in Next.js
 const createCustomIcon = (startup: Startup, isSelected: boolean) => {
+  if (typeof window === 'undefined') return undefined as any;
+
   const html = `
     <div class="${styles.markerPin} ${isSelected ? styles.selectedPin : ''}">
       <div class="${styles.markerInner}">
@@ -39,13 +41,20 @@ function MapController({
   const map = useMap();
 
   useEffect(() => {
-    if (selectedStartup) {
-      map.flyTo([selectedStartup.latitude, selectedStartup.longitude], 14, {
-        duration: 1.2,
-      });
-    } else if (startups.length > 0) {
-      const bounds = L.latLngBounds(startups.map((s) => [s.latitude, s.longitude]));
-      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+    if (!map) return;
+    try {
+      if (selectedStartup) {
+        map.flyTo([selectedStartup.latitude, selectedStartup.longitude], 14, {
+          duration: 1.2,
+        });
+      } else if (startups.length > 0) {
+        const bounds = L.latLngBounds(startups.map((s) => [s.latitude, s.longitude]));
+        if (bounds.isValid()) {
+          map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+        }
+      }
+    } catch (e) {
+      console.warn('Map bounds update warning:', e);
     }
   }, [selectedStartup, startups, map]);
 
@@ -57,15 +66,17 @@ function CustomMapControls() {
   const map = useMap();
 
   const handleMyLocation = () => {
-    map.flyTo([26.9124, 75.7873], 13, { duration: 1 });
+    if (map) {
+      map.flyTo([26.9124, 75.7873], 13, { duration: 1 });
+    }
   };
 
   const handleZoomIn = () => {
-    map.zoomIn();
+    if (map) map.zoomIn();
   };
 
   const handleZoomOut = () => {
-    map.zoomOut();
+    if (map) map.zoomOut();
   };
 
   return (
@@ -101,6 +112,23 @@ export default function StartupMap({
   selectedStartup,
   onSelectStartup,
 }: StartupMapProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <div className={styles.mapWrapper}>
+        <div className={styles.mapLoading}>
+          <div className={styles.spinner}></div>
+          <p>Loading Jaipur Startup Map...</p>
+        </div>
+      </div>
+    );
+  }
+
   const jaipurCenter: [number, number] = [26.9124, 75.7873];
 
   return (
@@ -122,11 +150,13 @@ export default function StartupMap({
 
         {startups.map((startup) => {
           const isSelected = selectedStartup?.id === startup.id;
+          const icon = createCustomIcon(startup, isSelected);
+
           return (
             <Marker
               key={startup.id}
               position={[startup.latitude, startup.longitude]}
-              icon={createCustomIcon(startup, isSelected)}
+              icon={icon}
               eventHandlers={{
                 click: () => onSelectStartup(startup),
               }}
