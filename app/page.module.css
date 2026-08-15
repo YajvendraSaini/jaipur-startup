@@ -62,9 +62,8 @@
   font-weight: 400;
   color: #ffffff;
   line-height: 1.15;
-  margin-bottom: 0.8rem;
-  /* text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); */
-  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  letter-spacing: -0.06em;
 }
 
 .heroSubtitle {
@@ -72,10 +71,9 @@
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   color: rgba(255, 255, 255, 0.95);
   font-weight: 400;
-  margin-bottom: 2.5rem;
+  margin-bottom: 20px;
   max-width: 680px;
   line-height: 1.45;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   letter-spacing: -0.06em;
 }
 
