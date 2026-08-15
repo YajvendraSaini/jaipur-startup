@@ -153,48 +153,124 @@ export default function Home() {
               )}
             </div>
 
-            {/* Right Column: Startup Cards List & Add CTA matching Map UI.png */}
+            {/* Right Column: Interactive Sidebar Panel matching Map UI.png */}
             <aside className={styles.sidebarColumn}>
-              <div className={styles.cardsStack}>
-                {filteredStartups.slice(0, 5).map((startup) => (
-                  <div key={startup.id} className={styles.startupCard}>
-                    <div className={styles.cardHeaderRow}>
-                      <div className={styles.logoBox}>
-                        <span className={styles.logoText}>{startup.logo}</span>
-                      </div>
-                      <div className={styles.cardMeta}>
-                        <h3 className={styles.startupName}>{startup.name}</h3>
-                        <p className={styles.startupDesc}>
-                          {startup.tagline || 'A vertically stacked set of interactive headings that reveal associated content.'}
-                        </p>
+              {/* Selected Startup Detail Panel when pin clicked on map */}
+              {selectedStartup ? (
+                <div className={styles.selectedDetailPanel}>
+                  <div className={styles.detailHeader}>
+                    <div className={styles.detailHeaderTitle}>
+                      <span className={styles.detailLogo}>{selectedStartup.logo}</span>
+                      <div>
+                        <h3 className={styles.detailName}>{selectedStartup.name}</h3>
+                        <div className={styles.detailPills}>
+                          <span className={styles.pSector}>{selectedStartup.sector}</span>
+                          <span className={styles.pStage}>{selectedStartup.stage}</span>
+                        </div>
                       </div>
                     </div>
-
-                    <div className={styles.cardActionsRow}>
-                      {startup.website ? (
-                        <a
-                          href={startup.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.actionBtn}
-                        >
-                          🌐 View Website
-                        </a>
-                      ) : (
-                        <span className={styles.actionBtnDisabled}>
-                          🌐 View Website
-                        </span>
-                      )}
-
-                      <Link
-                        href={`/startup/${startup.slug}`}
-                        className={styles.actionBtnSecondary}
-                      >
-                        🔍 Quick Scan
-                      </Link>
-                    </div>
+                    <button
+                      onClick={() => setSelectedStartup(null)}
+                      className={styles.closeDetailBtn}
+                      title="Close details view"
+                    >
+                      ✕
+                    </button>
                   </div>
-                ))}
+
+                  <p className={styles.detailTagline}>&ldquo;{selectedStartup.tagline}&rdquo;</p>
+                  <p className={styles.detailDesc}>{selectedStartup.description}</p>
+
+                  <div className={styles.detailMetaRow}>
+                    <span>📍 {selectedStartup.location}</span>
+                    <span>👥 {selectedStartup.teamSize} Employees</span>
+                  </div>
+
+                  {selectedStartup.founders && selectedStartup.founders.length > 0 && (
+                    <div className={styles.detailFoundersRow}>
+                      <span className={styles.detailFoundersLabel}>Founders:</span>{' '}
+                      {selectedStartup.founders.map((f) => f.name).join(', ')}
+                    </div>
+                  )}
+
+                  <div className={styles.detailActionsRow}>
+                    <Link
+                      href={`/startup/${selectedStartup.slug}`}
+                      className={styles.primaryDetailBtn}
+                    >
+                      View Full Profile →
+                    </Link>
+
+                    {selectedStartup.website && (
+                      <a
+                        href={selectedStartup.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.secondaryDetailBtn}
+                      >
+                        🌐 Website
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ) : null}
+
+              {/* Startup Cards Stack List */}
+              <div className={styles.cardsStack}>
+                {filteredStartups.map((startup) => {
+                  const isSelected = selectedStartup?.id === startup.id;
+                  return (
+                    <div
+                      key={startup.id}
+                      className={`${styles.startupCard} ${
+                        isSelected ? styles.activeCard : ''
+                      }`}
+                      onClick={() => setSelectedStartup(startup)}
+                    >
+                      <div className={styles.cardHeaderRow}>
+                        <div className={styles.logoBox}>
+                          <span className={styles.logoText}>{startup.logo}</span>
+                        </div>
+                        <div className={styles.cardMeta}>
+                          <h3 className={styles.startupName}>{startup.name}</h3>
+                          <p className={styles.startupDesc}>
+                            {startup.tagline ||
+                              'A vertically stacked set of interactive headings that reveal associated content.'}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className={styles.cardActionsRow}>
+                        {startup.website ? (
+                          <a
+                            href={startup.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.actionBtn}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            🌐 View Website
+                          </a>
+                        ) : (
+                          <span className={styles.actionBtnDisabled}>
+                            🌐 View Website
+                          </span>
+                        )}
+
+                        <button
+                          type="button"
+                          className={styles.actionBtnSecondary}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedStartup(startup);
+                          }}
+                        >
+                          🔍 Quick Scan
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
 
                 {filteredStartups.length === 0 && (
                   <div className={styles.noResultsCard}>
