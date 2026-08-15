@@ -1,0 +1,355 @@
+.pageContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-dark);
+}
+
+.loader {
+  text-align: center;
+  padding: 5rem 1rem;
+  color: var(--text-muted);
+}
+
+.main {
+  flex: 1;
+  padding-bottom: 4rem;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(180deg, rgba(255, 117, 140, 0.12) 0%, rgba(15, 10, 13, 0) 100%);
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--jaipur-pink);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin: 0 auto 2rem;
+}
+
+/* Progress Tracker */
+.progressTracker {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.stepNum {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.activeStep .stepNum {
+  background: var(--jaipur-pink);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 117, 140, 0.6);
+}
+
+.activeStep .stepLabel {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.completedStep .stepNum {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+/* Form Card */
+.formCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.stepHeading {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.input,
+.textarea,
+.select {
+  background: rgba(15, 10, 13, 0.8);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--jaipur-pink);
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.emojiPicker {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.emojiBtn {
+  font-size: 1.5rem;
+  padding: 0.5rem 0.8rem;
+  background: rgba(15, 10, 13, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.emojiBtn:hover,
+.selectedEmoji {
+  background: rgba(255, 117, 140, 0.2);
+  border-color: var(--jaipur-pink);
+  transform: scale(1.1);
+}
+
+.previewSubtext {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.previewBox {
+  background: rgba(15, 10, 13, 0.8);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.previewLogo {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.previewTitle {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.previewPills {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.pSector {
+  color: var(--jaipur-pink);
+  background: rgba(255, 117, 140, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+.pStage {
+  color: var(--jaipur-gold);
+  background: rgba(251, 191, 36, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+.pLoc {
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+.previewTag {
+  font-style: italic;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.previewDesc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form Nav */
+.formNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.prevBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nextBtn,
+.submitBtn {
+  margin-left: auto;
+  background: linear-gradient(135deg, #ff758c 0%, #e63946 100%);
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.35);
+}
+
+/* Auth Notice Screen */
+.authNoticeMain {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+}
+
+.authNoticeCard {
+  max-width: 480px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.noticeIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.authNoticeCard h2 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.authNoticeCard p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.75rem;
+}
+
+.authNoticeActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.primaryAuthBtn {
+  background: linear-gradient(135deg, #ff758c 0%, #e63946 100%);
+  color: #ffffff;
+  padding: 0.8rem;
+  border-radius: 100px;
+  font-weight: 600;
+}
+
+.secondaryAuthBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  padding: 0.75rem;
+  border-radius: 100px;
+  font-weight: 500;
+}
