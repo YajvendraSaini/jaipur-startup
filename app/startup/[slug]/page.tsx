@@ -3,6 +3,18 @@
 import { use } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import {
+  ArrowLeft,
+  Globe,
+  MapPin,
+  ExternalLink,
+  Users,
+  Calendar,
+  Building,
+  Map as MapIcon,
+  Share2,
+  AtSign,
+} from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useStartupsStore } from '@/lib/store';
@@ -12,7 +24,7 @@ import styles from './page.module.css';
 const StartupMap = dynamic(() => import('@/components/StartupMap'), {
   ssr: false,
   loading: () => (
-    <div style={{ height: '300px', background: '#181116', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>
+    <div style={{ height: '300px', background: '#f8fafc', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8' }}>
       Loading map location...
     </div>
   ),
@@ -43,11 +55,10 @@ export default function StartupProfilePage({ params }: PageProps) {
       <div className={styles.notFoundContainer}>
         <Navbar />
         <div className={styles.notFoundContent}>
-          <span className={styles.notFoundIcon}>🏛️</span>
           <h2>Startup Not Found</h2>
           <p>The startup profile you are looking for does not exist or has not been published yet.</p>
           <Link href="/startups" className={styles.backBtn}>
-            ← Browse Jaipur Startups
+            <ArrowLeft size={16} /> Browse Jaipur Startups
           </Link>
         </div>
         <Footer />
@@ -59,55 +70,65 @@ export default function StartupProfilePage({ params }: PageProps) {
     <div className={styles.pageContainer}>
       <Navbar />
 
-      <main className={styles.main}>
-        {/* Banner backdrop */}
-        <div className={styles.bannerHeader}>
-          <div className={styles.container}>
-            <Link href="/startups" className={styles.backLink}>
-              ← Back to Jaipur Directory
-            </Link>
+      {/* Hero Header with Header.png matching site identity */}
+      <section className={styles.heroHeader}>
+        <div className={styles.bgImageContainer}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/Header.png"
+            alt="Jaipur Architecture Backdrop"
+            className={styles.bgImage}
+          />
+        </div>
 
-            <div className={styles.profileHeaderCard}>
-              <div className={styles.logoBadge}>{startup.logo}</div>
-              
-              <div className={styles.headerInfo}>
-                <div className={styles.titleRow}>
-                  <h1 className={styles.startupName}>{startup.name}</h1>
-                  <span className={`${styles.statusBadge} ${styles[startup.status]}`}>
-                    {startup.status}
-                  </span>
-                </div>
+        <div className={styles.heroContent}>
+          <Link href="/startups" className={styles.backLink}>
+            <ArrowLeft size={15} /> Back to Jaipur Directory
+          </Link>
 
-                <p className={styles.tagline}>&ldquo;{startup.tagline}&rdquo;</p>
-
-                <div className={styles.pillsRow}>
-                  <span className={styles.sectorPill}>{startup.sector}</span>
-                  <span className={styles.stagePill}>{startup.stage}</span>
-                  <span className={styles.locationPill}>📍 {startup.location}</span>
-                </div>
+          <div className={styles.profileHeaderCard}>
+            <div className={styles.logoBadge}>{startup.logo}</div>
+            
+            <div className={styles.headerInfo}>
+              <div className={styles.titleRow}>
+                <h1 className={styles.startupName}>{startup.name}</h1>
+                <span className={`${styles.statusBadge} ${styles[startup.status]}`}>
+                  {startup.status}
+                </span>
               </div>
 
-              <div className={styles.headerCtaBox}>
-                {startup.website && (
-                  <a
-                    href={startup.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.primaryCta}
-                    id="profile-website-cta"
-                  >
-                    Visit Website ↗
-                  </a>
-                )}
-                <Link href="/" className={styles.secondaryCta}>
-                  View on Map 🗺️
-                </Link>
+              <p className={styles.tagline}>&ldquo;{startup.tagline}&rdquo;</p>
+
+              <div className={styles.pillsRow}>
+                <span className={styles.sectorPill}>{startup.sector}</span>
+                <span className={styles.stagePill}>{startup.stage}</span>
+                <span className={styles.locationPill}>
+                  <MapPin size={13} className={styles.inlineIcon} /> {startup.location}
+                </span>
               </div>
+            </div>
+
+            <div className={styles.headerCtaBox}>
+              {startup.website && (
+                <a
+                  href={startup.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.primaryCta}
+                  id="profile-website-cta"
+                >
+                  <Globe size={15} /> Visit Website <ExternalLink size={13} />
+                </a>
+              )}
+              <Link href="/" className={styles.secondaryCta}>
+                <MapIcon size={15} /> View on Map
+              </Link>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Content Layout */}
+      <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.profileGrid}>
             {/* Main Column */}
@@ -137,7 +158,7 @@ export default function StartupProfilePage({ params }: PageProps) {
                             rel="noreferrer"
                             className={styles.founderLinkedin}
                           >
-                            LinkedIn ↗
+                            <ExternalLink size={12} /> Profile
                           </a>
                         )}
                       </div>
@@ -169,7 +190,9 @@ export default function StartupProfilePage({ params }: PageProps) {
 
                 <div className={styles.overviewList}>
                   <div className={styles.overviewItem}>
-                    <span className={styles.itemLabel}>Sector</span>
+                    <span className={styles.itemLabel}>
+                      <Building size={14} className={styles.inlineIcon} /> Sector
+                    </span>
                     <span className={styles.itemValue}>{startup.sector}</span>
                   </div>
 
@@ -179,17 +202,23 @@ export default function StartupProfilePage({ params }: PageProps) {
                   </div>
 
                   <div className={styles.overviewItem}>
-                    <span className={styles.itemLabel}>Founded Year</span>
+                    <span className={styles.itemLabel}>
+                      <Calendar size={14} className={styles.inlineIcon} /> Founded
+                    </span>
                     <span className={styles.itemValue}>{startup.foundedYear}</span>
                   </div>
 
                   <div className={styles.overviewItem}>
-                    <span className={styles.itemLabel}>Team Size</span>
+                    <span className={styles.itemLabel}>
+                      <Users size={14} className={styles.inlineIcon} /> Team Size
+                    </span>
                     <span className={styles.itemValue}>{startup.teamSize} Employees</span>
                   </div>
 
                   <div className={styles.overviewItem}>
-                    <span className={styles.itemLabel}>Headquarters</span>
+                    <span className={styles.itemLabel}>
+                      <MapPin size={14} className={styles.inlineIcon} /> Headquarters
+                    </span>
                     <span className={styles.itemValue}>{startup.location}</span>
                   </div>
                 </div>
@@ -198,22 +227,22 @@ export default function StartupProfilePage({ params }: PageProps) {
                 <div className={styles.socialsList}>
                   {startup.website && (
                     <a href={startup.website} target="_blank" rel="noreferrer" className={styles.socialLink}>
-                      🌐 Website
+                      <Globe size={14} /> Website
                     </a>
                   )}
                   {startup.linkedin && (
                     <a href={startup.linkedin} target="_blank" rel="noreferrer" className={styles.socialLink}>
-                      💼 LinkedIn
+                      <Share2 size={14} /> LinkedIn
                     </a>
                   )}
                   {startup.instagram && (
                     <a href={startup.instagram} target="_blank" rel="noreferrer" className={styles.socialLink}>
-                      📸 Instagram
+                      <AtSign size={14} /> Instagram
                     </a>
                   )}
                   {startup.twitter && (
                     <a href={startup.twitter} target="_blank" rel="noreferrer" className={styles.socialLink}>
-                      🐦 Twitter / X
+                      <Share2 size={14} /> Twitter / X
                     </a>
                   )}
                 </div>

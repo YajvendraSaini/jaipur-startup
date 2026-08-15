@@ -2,26 +2,97 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-dark);
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+/* Hero Header matching site identity */
+.heroHeader {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  padding: 7rem 1.5rem 4rem;
+  overflow: hidden;
+  background: #111827;
+}
+
+.bgImageContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.heroHeader::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.heroTitle {
+  font-family: var(--font-serif), 'Georgia', serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.06em;
+}
+
+.heroSubtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+  margin-bottom: 20px;
+  max-width: 680px;
+  line-height: 1.45;
+  letter-spacing: -0.06em;
 }
 
 .main {
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 3rem 1.5rem;
-  background: radial-gradient(circle at 50% 30%, rgba(255, 117, 140, 0.12) 0%, rgba(15, 10, 13, 1) 70%);
+  align-items: center;
+  padding: 3.5rem 1.5rem 5rem;
+  background: #ffffff;
 }
 
 .card {
   width: 100%;
   max-width: 440px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
 }
 
 .header {
@@ -29,79 +100,75 @@
   margin-bottom: 1.75rem;
 }
 
-.brandBadge {
-  display: inline-block;
-  font-family: var(--font-serif);
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  color: var(--jaipur-pink);
-  margin-bottom: 0.5rem;
+.brandLogo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto 1.25rem;
+  display: block;
 }
 
 .title {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  color: #ffffff;
-  margin-bottom: 0.4rem;
+  font-family: var(--font-serif), 'Georgia', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
 }
 
 .subtitle {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  font-size: 0.88rem;
+  color: #64748b;
   line-height: 1.45;
 }
 
 .googleBtn {
   width: 100%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  padding: 0.75rem;
-  border-radius: var(--radius-sm);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 0.75rem;
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  transition: all 0.2s ease;
-  margin-bottom: 1.25rem;
+  transition: all 0.15s ease;
 }
 
 .googleBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.googleIcon {
-  font-size: 1.1rem;
+  background: #f1f5f9;
+  border-color: #94a3b8;
 }
 
 .divider {
   display: flex;
   align-items: center;
   text-align: center;
-  color: var(--text-dim);
-  font-size: 0.78rem;
-  margin-bottom: 1.25rem;
+  margin: 1.5rem 0;
+  color: #94a3b8;
+  font-size: 0.8rem;
 }
 
 .divider::before,
 .divider::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .divider span {
-  padding: 0 0.6rem;
+  padding: 0 0.75rem;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .field {
@@ -111,57 +178,76 @@
 }
 
 .field label {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.inputWithIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 0.9rem;
+  color: #94a3b8;
+  pointer-events: none;
 }
 
 .input {
-  background: rgba(15, 10, 13, 0.8);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-main);
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.6rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  color: #0f172a;
   outline: none;
   transition: border-color 0.2s ease;
 }
 
 .input:focus {
-  border-color: var(--jaipur-pink);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .submitBtn {
-  margin-top: 0.5rem;
-  background: linear-gradient(135deg, #ff758c 0%, #e63946 100%);
+  background: #2563eb;
   color: #ffffff;
   border: none;
-  padding: 0.8rem;
-  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
   font-size: 0.92rem;
   font-weight: 600;
+  padding: 0.8rem;
+  border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.35);
-  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.15s ease;
 }
 
 .submitBtn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+  background: #1d4ed8;
 }
 
 .toggleFooter {
   margin-top: 1.5rem;
   text-align: center;
   font-size: 0.85rem;
-  color: var(--text-dim);
+  color: #64748b;
 }
 
 .toggleBtn {
   background: transparent;
   border: none;
-  color: var(--jaipur-pink);
-  font-weight: 600;
+  color: #2563eb;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: underline;
 }

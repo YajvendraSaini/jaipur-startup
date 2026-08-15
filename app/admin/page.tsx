@@ -2,6 +2,17 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import {
+  Check,
+  X,
+  Search,
+  Clock,
+  CheckCircle,
+  XCircle,
+  Shield,
+  MapPin,
+  ExternalLink,
+} from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useStartupsStore } from '@/lib/store';
@@ -39,13 +50,22 @@ export default function AdminPage() {
     <div className={styles.pageContainer}>
       <Navbar />
 
-      <main className={styles.main}>
-        <div className={styles.container}>
-          <div className={styles.header}>
+      {/* Hero Header matching site identity */}
+      <section className={styles.heroHeader}>
+        <div className={styles.bgImageContainer}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/Header.png"
+            alt="Jaipur Architecture Backdrop"
+            className={styles.bgImage}
+          />
+        </div>
+
+        <div className={styles.heroContent}>
+          <div className={styles.heroHeaderTop}>
             <div>
-              <span className={styles.adminBadge}>Admin Review Portal</span>
-              <h1 className={styles.title}>Ecosystem Submissions</h1>
-              <p className={styles.subtitle}>
+              <h1 className={styles.heroTitle}>Ecosystem Admin</h1>
+              <p className={styles.heroSubtitle}>
                 Review founder submissions, verify location & quality, approve for public map activation.
               </p>
             </div>
@@ -61,26 +81,30 @@ export default function AdminPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
+      <main className={styles.main}>
+        <div className={styles.container}>
           {/* Navigation Tabs */}
           <div className={styles.tabsRow}>
             <button
               onClick={() => setActiveTab('pending')}
               className={`${styles.tabBtn} ${activeTab === 'pending' ? styles.activeTab : ''}`}
             >
-              ⏳ Pending ({pendingList.length})
+              <Clock size={15} /> Pending ({pendingList.length})
             </button>
             <button
               onClick={() => setActiveTab('published')}
               className={`${styles.tabBtn} ${activeTab === 'published' ? styles.activeTab : ''}`}
             >
-              ✅ Published ({publishedList.length})
+              <CheckCircle size={15} /> Published ({publishedList.length})
             </button>
             <button
               onClick={() => setActiveTab('rejected')}
               className={`${styles.tabBtn} ${activeTab === 'rejected' ? styles.activeTab : ''}`}
             >
-              ❌ Rejected ({rejectedList.length})
+              <XCircle size={15} /> Rejected ({rejectedList.length})
             </button>
           </div>
 
@@ -104,7 +128,9 @@ export default function AdminPage() {
                     </div>
 
                     <p className={styles.tagline}>&ldquo;{startup.tagline}&rdquo;</p>
-                    <p className={styles.location}>📍 {startup.location}</p>
+                    <p className={styles.location}>
+                      <MapPin size={13} className={styles.inlineIcon} /> {startup.location}
+                    </p>
 
                     <div className={styles.itemActions}>
                       <button
@@ -112,7 +138,7 @@ export default function AdminPage() {
                         className={styles.reviewBtn}
                         id={`review-startup-${startup.slug}`}
                       >
-                        🔍 Review Details
+                        <Search size={14} /> Review Details
                       </button>
 
                       {startup.status !== 'published' && (
@@ -121,7 +147,7 @@ export default function AdminPage() {
                           className={styles.approveBtn}
                           id={`approve-startup-${startup.slug}`}
                         >
-                          ✓ Approve
+                          <Check size={14} /> Approve
                         </button>
                       )}
 
@@ -130,7 +156,7 @@ export default function AdminPage() {
                           onClick={() => updateStatus(startup.id, 'rejected')}
                           className={styles.rejectBtn}
                         >
-                          ✕ Reject
+                          <X size={14} /> Reject
                         </button>
                       )}
                     </div>
@@ -139,6 +165,7 @@ export default function AdminPage() {
               </div>
             ) : (
               <div className={styles.emptyCard}>
+                <Shield size={36} className={styles.emptyIconLucide} />
                 <p>No startups currently in {activeTab} queue.</p>
               </div>
             )}
@@ -160,7 +187,7 @@ export default function AdminPage() {
                     onClick={() => setSelectedReviewStartup(null)}
                     className={styles.closeModalBtn}
                   >
-                    ✕
+                    <X size={16} />
                   </button>
                 </div>
 
@@ -190,7 +217,7 @@ export default function AdminPage() {
                     <p>
                       <strong>Website:</strong>{' '}
                       <a href={selectedReviewStartup.website} target="_blank" rel="noreferrer">
-                        {selectedReviewStartup.website} ↗
+                        {selectedReviewStartup.website} <ExternalLink size={13} style={{ display: 'inline' }} />
                       </a>
                     </p>
                   )}
@@ -204,7 +231,7 @@ export default function AdminPage() {
                     }}
                     className={styles.approveBtn}
                   >
-                    ✓ Approve & Publish to Map
+                    <Check size={16} /> Approve & Publish to Map
                   </button>
 
                   <button
@@ -214,7 +241,7 @@ export default function AdminPage() {
                     }}
                     className={styles.rejectBtn}
                   >
-                    ✕ Reject Submission
+                    <X size={16} /> Reject Submission
                   </button>
                 </div>
               </div>

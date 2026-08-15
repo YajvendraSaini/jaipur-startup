@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Check, ArrowRight, ArrowLeft, Rocket, ShieldAlert } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useStartupsStore } from '@/lib/store';
@@ -97,9 +98,29 @@ export default function AddStartupPage() {
     return (
       <div className={styles.pageContainer}>
         <Navbar />
+
+        {/* Hero Header */}
+        <section className={styles.heroHeader}>
+          <div className={styles.bgImageContainer}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/Header.png"
+              alt="Jaipur Architecture Backdrop"
+              className={styles.bgImage}
+            />
+          </div>
+
+          <div className={styles.heroContent}>
+            <h1 className={styles.heroTitle}>List Your Startup</h1>
+            <p className={styles.heroSubtitle}>
+              Put your startup on the official Jaipur ecosystem map and directory.
+            </p>
+          </div>
+        </section>
+
         <main className={styles.authNoticeMain}>
           <div className={styles.authNoticeCard}>
-            <span className={styles.noticeIcon}>🏰</span>
+            <ShieldAlert size={42} className={styles.noticeIconLucide} />
             <h2>Sign in to list your startup</h2>
             <p>
               To create and manage your startup listing on the public Jaipur Startup Map, please login or register an account.
@@ -110,7 +131,7 @@ export default function AddStartupPage() {
                 className={styles.primaryAuthBtn}
                 id="add-page-login-btn"
               >
-                Log In & Continue →
+                Log In & Continue <ArrowRight size={15} />
               </Link>
               <Link
                 href="/register?redirect=/add"
@@ -131,43 +152,54 @@ export default function AddStartupPage() {
     <div className={styles.pageContainer}>
       <Navbar />
 
-      <main className={styles.main}>
-        <div className={styles.header}>
-          <div className={styles.container}>
-            <span className={styles.badge}>Founder Submission</span>
-            <h1 className={styles.title}>List Your Startup</h1>
-            <p className={styles.subtitle}>
-              Put your startup on the official Jaipur ecosystem map and directory.
-            </p>
-
-            {/* Step Progress Bar */}
-            <div className={styles.progressTracker}>
-              {[
-                { num: 1, label: 'Basic' },
-                { num: 2, label: 'About' },
-                { num: 3, label: 'Online' },
-                { num: 4, label: 'Location' },
-                { num: 5, label: 'Preview' },
-              ].map((s) => (
-                <div
-                  key={s.num}
-                  className={`${styles.stepItem} ${
-                    step === s.num
-                      ? styles.activeStep
-                      : step > s.num
-                      ? styles.completedStep
-                      : ''
-                  }`}
-                  onClick={() => s.num < step && setStep(s.num)}
-                >
-                  <span className={styles.stepNum}>{s.num > step ? s.num : step > s.num ? '✓' : s.num}</span>
-                  <span className={styles.stepLabel}>{s.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Hero Header with Header.png matching site theme */}
+      <section className={styles.heroHeader}>
+        <div className={styles.bgImageContainer}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/Header.png"
+            alt="Jaipur Architecture Backdrop"
+            className={styles.bgImage}
+          />
         </div>
 
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>List Your Startup</h1>
+          <p className={styles.heroSubtitle}>
+            Put your startup on the official Jaipur ecosystem map and directory.
+          </p>
+
+          {/* Step Progress Tracker */}
+          <div className={styles.progressTrackerCard}>
+            {[
+              { num: 1, label: 'Basic' },
+              { num: 2, label: 'About' },
+              { num: 3, label: 'Online' },
+              { num: 4, label: 'Location' },
+              { num: 5, label: 'Preview' },
+            ].map((s) => (
+              <div
+                key={s.num}
+                className={`${styles.stepItem} ${
+                  step === s.num
+                    ? styles.activeStep
+                    : step > s.num
+                    ? styles.completedStep
+                    : ''
+                }`}
+                onClick={() => s.num < step && setStep(s.num)}
+              >
+                <span className={styles.stepNum}>
+                  {step > s.num ? <Check size={14} /> : s.num}
+                </span>
+                <span className={styles.stepLabel}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.formCard}>
             <form onSubmit={handleSubmit}>
@@ -476,7 +508,7 @@ export default function AddStartupPage() {
                     onClick={handlePrev}
                     className={styles.prevBtn}
                   >
-                    ← Back
+                    <ArrowLeft size={15} /> Back
                   </button>
                 )}
 
@@ -486,7 +518,7 @@ export default function AddStartupPage() {
                     onClick={handleNext}
                     className={styles.nextBtn}
                   >
-                    Next Step →
+                    Next Step <ArrowRight size={15} />
                   </button>
                 ) : (
                   <button
@@ -494,7 +526,7 @@ export default function AddStartupPage() {
                     className={styles.submitBtn}
                     id="submit-startup-final-btn"
                   >
-                    🚀 Submit Startup for Review
+                    <Rocket size={18} /> Submit Startup for Review
                   </button>
                 )}
               </div>

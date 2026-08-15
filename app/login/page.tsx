@@ -3,6 +3,7 @@
 import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { ArrowRight, Globe, Mail, Lock, User as UserIcon } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useStartupsStore } from '@/lib/store';
@@ -36,14 +37,19 @@ function LoginContent() {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <span className={styles.brandBadge}>JAIPUR STARTUP</span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/text logo.png"
+          alt="Jaipur Startup"
+          className={styles.brandLogo}
+        />
         <h1 className={styles.title}>
           {isNewUser ? 'Create Founder Account' : 'Welcome Back'}
         </h1>
         <p className={styles.subtitle}>
           {redirect === '/add'
             ? 'Sign in or create an account to list your startup on the Jaipur map.'
-            : 'Manage your Jaipur startup listing and profile.'}
+            : 'Manage your Jaipur startup listing and ecosystem profile.'}
         </p>
       </div>
 
@@ -53,7 +59,7 @@ function LoginContent() {
         type="button"
         id="google-login-btn"
       >
-        <span className={styles.googleIcon}>🌐</span> Continue with Google
+        <Globe size={18} /> Continue with Google
       </button>
 
       <div className={styles.divider}>
@@ -64,45 +70,55 @@ function LoginContent() {
         {isNewUser && (
           <div className={styles.field}>
             <label>Your Full Name</label>
-            <input
-              type="text"
-              placeholder="e.g. Vikramaditya Singh"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required={isNewUser}
-              className={styles.input}
-            />
+            <div className={styles.inputWithIcon}>
+              <UserIcon size={16} className={styles.inputIcon} />
+              <input
+                type="text"
+                placeholder="e.g. Vikramaditya Singh"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required={isNewUser}
+                className={styles.input}
+              />
+            </div>
           </div>
         )}
 
         <div className={styles.field}>
           <label>Work Email</label>
-          <input
-            type="email"
-            placeholder="founder@yourcompany.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className={styles.input}
-            id="login-email-input"
-          />
+          <div className={styles.inputWithIcon}>
+            <Mail size={16} className={styles.inputIcon} />
+            <input
+              type="email"
+              placeholder="founder@yourcompany.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className={styles.input}
+              id="login-email-input"
+            />
+          </div>
         </div>
 
         <div className={styles.field}>
           <label>Password</label>
-          <input
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className={styles.input}
-            id="login-password-input"
-          />
+          <div className={styles.inputWithIcon}>
+            <Lock size={16} className={styles.inputIcon} />
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className={styles.input}
+              id="login-password-input"
+            />
+          </div>
         </div>
 
         <button type="submit" className={styles.submitBtn} id="login-submit-btn">
-          {isNewUser ? 'Register & Continue to Listing →' : 'Log In & Continue →'}
+          {isNewUser ? 'Register & Continue to Listing' : 'Log In & Continue'}{' '}
+          <ArrowRight size={15} />
         </button>
       </form>
 
@@ -139,6 +155,26 @@ export default function LoginPage() {
   return (
     <div className={styles.pageContainer}>
       <Navbar />
+
+      {/* Hero Header with Header.png matching site identity */}
+      <section className={styles.heroHeader}>
+        <div className={styles.bgImageContainer}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/Header.png"
+            alt="Jaipur Architecture Backdrop"
+            className={styles.bgImage}
+          />
+        </div>
+
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>Founder Portal</h1>
+          <p className={styles.heroSubtitle}>
+            Join Jaipur&rsquo;s official startup network and showcase your venture.
+          </p>
+        </div>
+      </section>
+
       <main className={styles.main}>
         <Suspense fallback={<div className={styles.card}>Loading...</div>}>
           <LoginContent />
